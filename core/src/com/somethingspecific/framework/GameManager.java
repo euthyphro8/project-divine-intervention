@@ -8,7 +8,7 @@ public class GameManager {
     LoadManager assets;
     ScreenManager screen;
 
-    public GameManager(LoadManager assets, ScreenManager screen) {
+    public GameManager(LoadManager assets) {
         this.assets = assets;
         this.screen = screen;
         entityManager = new EntityManager();

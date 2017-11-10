@@ -43,8 +43,14 @@ public class ScreenManager {
         oc.update();
     }
 
+    public void render(TextureRegion texture, float x, float y) {
+        sb.draw(texture, x, y);
+    }
     public void render(Texture texture, float x, float y) {
         sb.draw(texture, x, y);
+    }
+    public void render(Texture texture, Vector2 position) {
+        sb.draw(texture, position.x, position.y);
     }
     public void render(TextureRegion texture, Vector2 position) {
         sb.draw(texture, position.x, position.y);
