@@ -65,6 +65,7 @@ public class Player extends Mob {
 
         velocity.add(Entity.gravity);
         newPosition.x += InputManager.horizontal[playerNum];
+        System.out.print("newPosition "+newPosition.x);
         newPosition.add(velocity);
 
 
