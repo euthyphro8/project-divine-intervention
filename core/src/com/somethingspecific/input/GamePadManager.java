@@ -58,7 +58,7 @@ public class GamePadManager implements ControllerListener{
     }
     @Override
     public boolean axisMoved(Controller controller, int axisCode, float value) {
-
+        if(Math.abs(value) < 0.05);
 
         if(controller == pads[0]) {
             if(axisCode == 1) {
