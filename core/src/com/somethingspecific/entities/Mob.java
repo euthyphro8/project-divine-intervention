@@ -17,13 +17,12 @@ public class Mob extends Entity {
     public Mob(EntityManager ent, Vector2 position){
         super(position);
         this.ent = ent;
-        velocity.x = 0f;
-        velocity.y = 0f;
+        velocity = new Vector2(0, 0);
     }
     public Mob(EntityManager ent, float x, float y){
         super(x,y);
         this.ent = ent;
-        velocity = new Vector2(x, y);
+        velocity = new Vector2(0, 0);
     }
 
     public void setVelocity(Vector2 v){

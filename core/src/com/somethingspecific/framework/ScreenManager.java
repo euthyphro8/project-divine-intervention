@@ -18,7 +18,7 @@ public class ScreenManager {
     public ScreenManager() {
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
-        oc = new OrthographicCamera(800, 800 * (height / width));
+        oc = new OrthographicCamera(1920, 1920 * (height / width));
         oc.position.set(oc.viewportWidth / 2f, oc.viewportHeight/2, 0);
         oc.update();
         sb = new SpriteBatch();
@@ -40,8 +40,8 @@ public class ScreenManager {
     }
 
 
-    public void setPosition(Vector2 position) {
-        oc.position.set(position, 1.0f);
+    public void setPosition(float x) {
+        oc.position.set(x, oc.viewportHeight/2, 1.0f);
         sb.setProjectionMatrix(oc.combined);
         oc.update();
     }
