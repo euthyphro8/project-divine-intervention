@@ -10,8 +10,8 @@ public class MapManager {
 
     }
 
-    public void render(){
-
+    public void render(ScreenManager screen){
+    
     }
 
 }

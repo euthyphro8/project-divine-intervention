@@ -15,4 +15,14 @@ public class GameManager {
         mapManager = new MapManager();
         uiManager = new UIManager();
     }
+
+    public void update(){
+
+    }
+
+    public void render(ScreenManager screen){
+
+        mapManager.render(screen);
+        entityManager.render(screen);
+        }
 }
