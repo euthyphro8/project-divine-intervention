@@ -32,16 +32,10 @@ public class GamePadManager implements ControllerListener{
             if(buttonCode == 0){
                 InputManager.jump[0] = true;
             }
-            if(buttonCode == 2){
-                InputManager.dash[0] = true;
-            }
 
         }else if(controller == pads[1]) {
             if(buttonCode == 0){
                 InputManager.jump[1] = true;
-            }
-            if(buttonCode == 2){
-                InputManager.dash[1] = true;
             }
 
         }
@@ -80,7 +74,7 @@ public class GamePadManager implements ControllerListener{
             }
             // Trigger
             if(axisCode ==4){
-                InputManager.trigger[0] = value;
+                InputManager.trigger[1] = value;
             }
         }
         return true;
