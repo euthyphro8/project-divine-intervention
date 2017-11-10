@@ -24,6 +24,14 @@ public class Player extends Mob {
     public void jump(){
         velocity.y += 20;
     }
+    public void dashLeft(){
+        newPosition.x -=20 ;
+        dashing = true;
+    }
+    public void dashRight(){
+        newPosition.x += 20;
+        dashing = true;
+    }
 
     public void move(){
         if(InputManager.jump[playerNum] && !jumping) {
@@ -33,11 +41,12 @@ public class Player extends Mob {
         else if(!InputManager.jump[playerNum]){
             jumping = false;
         }
-        if(InputManager.dash[playerNum] && !dashing) {
-            //jump();
-            dashing = true;
+        if(InputManager.trigger[playerNum]>=1){
+            dashLeft();
+        }else if(InputManager.trigger[playerNum]<=-1) {
+            dashRight();
         }
-        else if(!InputManager.dash[playerNum]){
+        else if(InputManager.trigger[playerNum]<1&&InputManager.trigger[playerNum]>-1){
             dashing = false;
         }
 

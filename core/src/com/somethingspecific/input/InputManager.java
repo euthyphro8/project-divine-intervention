@@ -8,7 +8,7 @@ public class InputManager {
 
     public static float[] vertical, horizontal;
     public static boolean[] jump;
-    public static boolean[] dash;
+    public static float[] trigger;
 
     public static void init() {
         game = new GamePadManager();
@@ -17,7 +17,7 @@ public class InputManager {
         vertical = new float[2];
 
         jump = new boolean[2];
-        dash = new boolean[2];
+        trigger = new float[2];
     }
 
     public static void update() {
