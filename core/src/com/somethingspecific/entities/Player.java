@@ -21,13 +21,16 @@ public class Player extends Mob {
 
 
 
-    public void jump(){
+    public void jump() {
         velocity.y += 20;
     }
     public void dashLeft(){
         newPosition.x -=20 ;
         dashing = true;
     }
+
+
+
     public void dashRight(){
         newPosition.x += 20;
         dashing = true;
@@ -62,12 +65,34 @@ public class Player extends Mob {
         newPosition.add(velocity);
 
 
-
-        if(ent.checkCollision(newPosition, size)) {
-            position.set(newPosition);
+        collPosition.set(position);
+        int scale = 1;
+        boolean collided = false;
+        if(position.x > newPosition.x) scale = -1;
+        for(float x = position.x; x < newPosition.x; x += 1 * scale) {
+            collPosition.add(x, 0);
+            if(!ent.checkCollision(collPosition, size))  {
+                position.set(collPosition);
+                collided = true;
+                break;
+            }
         }
+        if(!collided) position.set(collPosition);
+        collPosition.set(position);
+        scale = 1;
+        collided = false;
+        if(position.x > newPosition.x) scale = -1;
+        for(float x = position.x; x < newPosition.x; x += 1 * scale) {
+            collPosition.add(x, 0);
+            if(!ent.checkCollision(collPosition, size))  {
+                position.set(collPosition);
+                collided = true;
+                break;
+            }
+        }
+        if(!collided) position.set(collPosition);
+
     }
-    float xStep, yStep;
 
 
     @Override
