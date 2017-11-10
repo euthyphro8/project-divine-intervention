@@ -27,7 +27,8 @@ public class ScreenManager {
         oc.update();
 
         sb.setProjectionMatrix(oc.combined);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl20.glClearColor(.5f,.5f,.5f,1.0f);
 
         sb.begin();
 

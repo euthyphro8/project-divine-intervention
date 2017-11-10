@@ -28,13 +28,13 @@ public class Master extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+		SpriteSheet.init();
 		state = State.GAME;
 		screen = new ScreenManager();
 		game = new GameManager(load);
 		load = new LoadManager();
 		menu = new MenuManager();
 
-		SpriteSheet.init();
 	}
 
 

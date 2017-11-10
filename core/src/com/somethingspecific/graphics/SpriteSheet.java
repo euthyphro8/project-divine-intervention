@@ -9,7 +9,7 @@ public class SpriteSheet {
     public static Texture bigHead;
 
     public static void init() {
-        bigHead = new Texture(Gdx.files.internal("textures/bighead.png"));
+        bigHead = new Texture(Gdx.files.internal("textures/BigHead.png"));
     }
 
 

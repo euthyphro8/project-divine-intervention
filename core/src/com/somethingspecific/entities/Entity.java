@@ -6,18 +6,25 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Entity {
     Vector2 position;
-    Vector2 velocity;
     Texture texture;
 
-    public Entity(Vector2 position, Vector2 velocity){
+    public Entity(Vector2 position){
         this.position = position;
-        this.velocity = velocity;
     }
+    public Entity(float x, float y){
+        Vector2 p=new Vector2();
+        p.x = x;
+        p.y = y;
+        position = p;
+    }
+
+
 
     public void update(){
     }
 
     public void render(ScreenManager screen){
-        screen.render(texture, position);
+        System.out.println("{Entity} position "+position.x+" "+position.y+" "+texture);
+        screen.render(texture, position.x,position.y);
     }
 }
