@@ -33,7 +33,6 @@ public class Mob extends Entity {
     @Override
     public void update(){
         super.update();
-        newPosition.set(position);
     }
 
 
