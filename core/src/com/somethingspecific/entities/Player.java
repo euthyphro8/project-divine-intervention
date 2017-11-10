@@ -32,7 +32,7 @@ public class Player extends Mob {
 
 
     public void dashRight(){
-        newPosition.x += 20;
+        newPosition.x += 1;
         dashing = true;
     }
 
@@ -44,12 +44,15 @@ public class Player extends Mob {
         else if(!InputManager.jump[playerNum]){
             jumping = false;
         }
-        if(InputManager.trigger[playerNum]>=1){
+        if(InputManager.trigger[playerNum]>=.5f){
+            System.out.println("{Player} triggerValue "+ InputManager.trigger[playerNum]);
             dashLeft();
-        }else if(InputManager.trigger[playerNum]<=-1) {
+        }else if(InputManager.trigger[playerNum]<=-.5f) {
+            System.out.println("{Player} triggerValue "+ InputManager.trigger[playerNum]);
             dashRight();
         }
-        else if(InputManager.trigger[playerNum]<1&&InputManager.trigger[playerNum]>-1){
+        else if(InputManager.trigger[playerNum]>.5||InputManager.trigger[playerNum]<-.5){
+            System.out.println("{Player} triggerValue "+ InputManager.trigger[playerNum]);
             dashing = false;
         }
 
