@@ -42,6 +42,7 @@ public class ScreenManager {
 
     public void setPosition(Vector2 position) {
         oc.position.set(position, 1.0f);
+        sb.setProjectionMatrix(oc.combined);
         oc.update();
     }
     public void render(Texture texture, float x, float y, float w, float h) {

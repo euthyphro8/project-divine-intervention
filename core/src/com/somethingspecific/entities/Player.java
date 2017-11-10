@@ -2,6 +2,7 @@ package com.somethingspecific.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.somethingspecific.framework.EntityManager;
 import com.somethingspecific.graphics.SpriteSheet;
 import com.somethingspecific.input.GamePadManager;
 import com.somethingspecific.input.InputManager;
@@ -10,18 +11,18 @@ public class Player extends Mob {
     int playerNum;
     boolean jumping = false;
 
-    public Player(Vector2 position, int playerNum){
-        super(position);
+    public Player(EntityManager ent, Vector2 position, int playerNum){
+        super(ent, position);
         texture = SpriteSheet.bigHead;
         this.playerNum =playerNum;
     }
-    public Player(float x, float y, int playerNum){
-        super(x,y);
+    public Player(EntityManager ent, float x, float y, int playerNum){
+        super(ent, x,y);
         texture = SpriteSheet.bigHead;
         this.playerNum =playerNum;
     }
-    public Player(float x, float y, Texture t, int playerNum){
-        super(x,y);
+    public Player(EntityManager ent, float x, float y, Texture t, int playerNum){
+        super(ent, x,y);
         texture = t;
         this.playerNum =playerNum;
     }

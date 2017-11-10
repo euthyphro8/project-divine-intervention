@@ -5,8 +5,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 public class Entity {
-    Vector2 position;
-    Texture texture;
+
+    public Vector2 position;
+    public Texture texture;
 
     public Entity(Vector2 position){
         this.position = position;
