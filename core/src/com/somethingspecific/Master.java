@@ -1,6 +1,7 @@
 package com.somethingspecific;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.somethingspecific.framework.State;
@@ -46,7 +47,7 @@ public class Master extends ApplicationAdapter {
 		}else if(state == State.GAME) {
 			game.update();
 		}else if(state == State.EXITING) {
-
+			Gdx.app.exit();
 		}
 	}
 
@@ -60,13 +61,11 @@ public class Master extends ApplicationAdapter {
 		screen.render(SpriteSheet.bigHead, 150, 150);
 
 		if(state == State.LOADING) {
-
+			load.render(screen);
 		}else if(state == State.MENU) {
-
+			menu.render(screen);
 		}else if(state == State.GAME) {
-
-		}else if(state == State.EXITING) {
-
+			game.render(screen);
 		}
 		screen.stop();
 
