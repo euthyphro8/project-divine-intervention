@@ -27,7 +27,8 @@ public class ScreenManager {
         oc.update();
 
         sb.setProjectionMatrix(oc.combined);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl20.glClearColor(0.1f, 0.5f, 0.8f, 1.0f);
 
         sb.begin();
 
@@ -42,7 +43,10 @@ public class ScreenManager {
         oc.position.set(position, 1.0f);
         oc.update();
     }
+    public void render(Texture texture, float x, float y, float w, float h) {
 
+        sb.draw(texture, x, y, w, h);
+    }
     public void render(TextureRegion texture, float x, float y) {
         sb.draw(texture, x, y);
     }

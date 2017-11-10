@@ -10,6 +10,7 @@ import com.somethingspecific.framework.GameManager;
 import com.somethingspecific.framework.LoadManager;
 import com.somethingspecific.framework.MenuManager;
 import com.somethingspecific.graphics.SpriteSheet;
+import com.somethingspecific.input.InputManager;
 
 public class Master extends ApplicationAdapter {
 
@@ -35,11 +36,14 @@ public class Master extends ApplicationAdapter {
 		menu = new MenuManager();
 
 		SpriteSheet.init();
+		InputManager.init();
 	}
 
 
 
 	public void update() {
+		InputManager.update();
+
 		if(state == State.LOADING) {
 			load.update();
 		}else if(state == State.MENU) {
@@ -50,15 +54,9 @@ public class Master extends ApplicationAdapter {
 			Gdx.app.exit();
 		}
 	}
-
 	@Override
 	public void render () {
 		update();
-
-
-
-		screen.start();
-		screen.render(SpriteSheet.bigHead, 150, 150);
 
 		if(state == State.LOADING) {
 			load.render(screen);
