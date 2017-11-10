@@ -30,13 +30,13 @@ public class Master extends ApplicationAdapter {
 	@Override
 	public void create () {
 		state = State.GAME;
+		SpriteSheet.init();
+		InputManager.init();
 		screen = new ScreenManager();
 		game = new GameManager(load);
 		load = new LoadManager();
 		menu = new MenuManager();
 
-		SpriteSheet.init();
-		InputManager.init();
 	}
 
 
@@ -54,9 +54,14 @@ public class Master extends ApplicationAdapter {
 			Gdx.app.exit();
 		}
 	}
+
 	@Override
 	public void render () {
 		update();
+
+
+
+		screen.start();
 
 		if(state == State.LOADING) {
 			load.render(screen);
