@@ -1,6 +1,8 @@
 package com.somethingspecific.framework;
 
 
+import com.somethingspecific.graphics.SpriteSheet;
+
 public class GameManager {
     EntityManager entityManager;
     MapManager mapManager;
@@ -12,7 +14,7 @@ public class GameManager {
         this.assets = assets;
         this.screen = screen;
         entityManager = new EntityManager();
-        mapManager = new MapManager();
+        mapManager = new MapManager(SpriteSheet.one);
         uiManager = new UIManager();
     }
 
@@ -21,8 +23,7 @@ public class GameManager {
     }
 
     public void render(ScreenManager screen){
-
         mapManager.render(screen);
         entityManager.render(screen);
-        }
+    }
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.math.Vector3;
 
+
 public class GamePadManager implements ControllerListener{
 
     private int count;
@@ -13,9 +14,16 @@ public class GamePadManager implements ControllerListener{
 
     public GamePadManager() {
         Controllers.addListener(this);
+
         count = Controllers.getControllers().size;
         pads = new Controller[2];
+        for(int i = 0; i < count; i++) {
+            if(i > 1) break;
+            pads[i] = Controllers.getControllers().get(i);
+         }
     }
+
+
 
 
     @Override
@@ -47,6 +55,7 @@ public class GamePadManager implements ControllerListener{
                 InputManager.horizontal[1] = value;
             }
         }
+        System.out.println(InputManager.horizontal[0]);
          return true;
     }
     @Override

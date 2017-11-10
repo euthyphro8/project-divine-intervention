@@ -19,7 +19,8 @@ public class ScreenManager {
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
         oc = new OrthographicCamera(800, 800 * (height / width));
-
+        oc.position.set(oc.viewportWidth / 2f, oc.viewportHeight/2, 0);
+        oc.update();
         sb = new SpriteBatch();
     }
 
