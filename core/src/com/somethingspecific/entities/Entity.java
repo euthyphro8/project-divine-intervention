@@ -1,19 +1,23 @@
 package com.somethingspecific.entities;
+import com.somethingspecific.framework.ScreenManager;
+
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 
 public class Entity {
-    AssetManager assets;
-    ScreenManager screen;
-    float x;
-    float y;
-    float dx;
-    float dy;
+    Vector2 position;
+    Vector2 velocity;
+    Texture texture;
 
-    public Entity(AssetManager assets, ScreenManager screen, float xPosition, float yPosition, float xVelocity, float yVelocity){
-        this.assets = assets;
-        this.screen = screen;
-        x = xPosition;
-        y = yPosition;
-        dx = xVelocity;
-        dy = yVelocity;
+    public Entity(Vector2 position, Vector2 velocity){
+        this.position = position;
+        this.velocity = velocity;
+    }
+
+    public void update(){
+    }
+
+    public void render(ScreenManager screen){
+        screen.render(texture, position);
     }
 }
