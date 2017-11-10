@@ -29,8 +29,14 @@ public class GamePadManager implements ControllerListener{
     @Override
     public boolean buttonDown(Controller controller, int buttonCode) {
         if(controller == pads[0]) {
+            if(buttonCode == 0){
+                InputManager.jump[0] = true;
+            }
 
         }else if(controller == pads[1]) {
+            if(buttonCode == 0){
+                InputManager.jump[1] = true;
+            }
 
         }
         return true;
@@ -38,14 +44,21 @@ public class GamePadManager implements ControllerListener{
     @Override
     public boolean buttonUp(Controller controller, int buttonCode) {
         if(controller == pads[0]) {
+            if(buttonCode == 0){
+                InputManager.jump[0] = false;
+            }
 
         }else if(controller == pads[1]) {
+            if(buttonCode == 0){
+                InputManager.jump[1] = false;
+            }
 
         }
         return true;
     }
     @Override
     public boolean axisMoved(Controller controller, int axisCode, float value) {
+
         if(controller == pads[0]) {
             if(axisCode == 1) {
                 InputManager.horizontal[0] = value;
@@ -55,8 +68,7 @@ public class GamePadManager implements ControllerListener{
                 InputManager.horizontal[1] = value;
             }
         }
-        System.out.println(InputManager.horizontal[0]);
-         return true;
+        return true;
     }
     @Override
     public boolean povMoved(Controller controller, int povCode, PovDirection value) {
