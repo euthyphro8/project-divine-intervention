@@ -17,6 +17,7 @@ public class GameManager {
     }
 
     public void update(){
+        entityManager.update();
 
     }
 

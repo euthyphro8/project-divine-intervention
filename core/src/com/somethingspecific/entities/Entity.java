@@ -24,7 +24,6 @@ public class Entity {
     }
 
     public void render(ScreenManager screen){
-        System.out.println("{Entity} position "+position.x+" "+position.y+" "+texture);
         screen.render(texture, position.x,position.y);
     }
 }

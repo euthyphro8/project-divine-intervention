@@ -37,5 +37,7 @@ public class Mob extends Entity {
     public void update(){
         position.x+=velocity.x;
         position.y+=velocity.y;
+        if(position.y>0)
+        velocity.y -=1;
     }
 }
