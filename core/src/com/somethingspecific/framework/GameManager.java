@@ -1,6 +1,7 @@
 package com.somethingspecific.framework;
 
 
+import com.badlogic.gdx.math.Vector2;
 import com.somethingspecific.graphics.SpriteSheet;
 
 public class GameManager {
@@ -18,6 +19,7 @@ public class GameManager {
 
     public void update(){
         entityManager.update();
+
     }
 
     public void render(ScreenManager screen){

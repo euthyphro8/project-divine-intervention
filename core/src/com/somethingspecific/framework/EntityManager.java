@@ -10,16 +10,25 @@ public class EntityManager {
     MapManager map;
     ArrayList<Entity> entities;
     Entity[] players;
-    float gravity;
 
     public EntityManager(MapManager map){
         this.map = map;
         entities = new ArrayList<Entity>();
         players = new Entity[2];
+<<<<<<< HEAD
         players[0] = new Player(this, -300.0f,0.0f, SpriteSheet.bigHead, 0);
         players[1] = new Player(this, 300.0f,0.0f,SpriteSheet.bigHead, 1);
         gravity = 1.5f;
+=======
+        players[0] = new Player(-300.0f,0.0f, SpriteSheet.bigHead, 0);
+        players[1] = new Player(300.0f,0.0f,SpriteSheet.bigHead, 1);
+>>>>>>> origin/master
 
+
+    }
+
+    public Vector2 findPosition(){
+        return new Vector2((players[0].position.x+ players[1].position.x)/2,0);
     }
 
     public void update(){
@@ -29,6 +38,8 @@ public class EntityManager {
     }
 
     public void render(ScreenManager screen){
+        screen.setPosition(findPosition());
+
         for(int i=0;i<players.length;i++){
             players[i].render(screen);
         }
@@ -40,6 +51,7 @@ public class EntityManager {
         float y0 = position.y;
         float y1 = position.y + size.y;
 
+<<<<<<< HEAD
         for(int y = 0; y < map.height; y++) {
             for(int x = 0; x < map.width; x++) {
                 if(map.tiles[x + ( y * map.width)] >= 0) continue;
@@ -62,5 +74,8 @@ public class EntityManager {
                 return false;
         }
         return true;
+=======
+
+>>>>>>> origin/master
     }
 }
