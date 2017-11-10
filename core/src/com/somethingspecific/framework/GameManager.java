@@ -1,6 +1,7 @@
 package com.somethingspecific.framework;
 
 
+import com.badlogic.gdx.math.Vector2;
 import com.somethingspecific.graphics.SpriteSheet;
 
 public class GameManager {
@@ -8,11 +9,9 @@ public class GameManager {
     MapManager mapManager;
     UIManager uiManager;
     LoadManager assets;
-    ScreenManager screen;
 
     public GameManager(LoadManager assets) {
         this.assets = assets;
-        this.screen = screen;
         entityManager = new EntityManager();
         mapManager = new MapManager(SpriteSheet.one);
         uiManager = new UIManager();

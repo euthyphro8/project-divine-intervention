@@ -9,6 +9,7 @@ import com.somethingspecific.input.InputManager;
 public class Player extends Mob {
     int playerNum;
     boolean jumping = false;
+    boolean dashing = false;
 
     public Player(Vector2 position, int playerNum){
         super(position);
@@ -29,9 +30,7 @@ public class Player extends Mob {
         velocity.y += 20;
     }
 
-    @Override
-    public void update(){
-        super.update();
+    public void move(){
         if(InputManager.jump[playerNum] && !jumping) {
             jump();
             jumping = true;
@@ -39,8 +38,21 @@ public class Player extends Mob {
         else if(!InputManager.jump[playerNum]){
             jumping = false;
         }
+        if(InputManager.dash[playerNum] && !dashing) {
+            //jump();
+            dashing = true;
+        }
+        else if(!InputManager.dash[playerNum]){
+            dashing = false;
+        }
 
         position.x += InputManager.horizontal[playerNum];
+    }
+
+    @Override
+    public void update(){
+        super.update();
+        move();
     }
 
 }
