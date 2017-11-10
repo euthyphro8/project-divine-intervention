@@ -12,21 +12,15 @@ public class Player extends Mob {
     boolean jumping = false;
     boolean dashing = false;
 
-    public Player(EntityManager ent, Vector2 position, int playerNum){
-        super(ent, position);
-        texture = SpriteSheet.bigHead;
-        this.playerNum =playerNum;
-    }
-    public Player(EntityManager ent, float x, float y, int playerNum){
-        super(ent, x,y);
-        texture = SpriteSheet.bigHead;
-        this.playerNum =playerNum;
-    }
     public Player(EntityManager ent, float x, float y, Texture t, int playerNum){
-        super(ent, x,y);
-        texture = t;
+        super(ent, t, x,y);
         this.playerNum =playerNum;
     }
+
+
+
+
+
     public void jump(){
         velocity.y += 20;
     }
@@ -47,8 +41,25 @@ public class Player extends Mob {
             dashing = false;
         }
 
-        position.x += InputManager.horizontal[playerNum];
+
+
+        if(velocity.x > 10) velocity.x = 10;
+        if(velocity.y > 10) velocity.y = 10;
+        if(velocity.x < -10) velocity.x = -10;
+        if(velocity.y < -10) velocity.y = -10;
+
+        velocity.add(Entity.gravity);
+        newPosition.x += InputManager.horizontal[playerNum];
+        newPosition.add(velocity);
+
+
+
+        if(ent.checkCollision(newPosition, size)) {
+            position.set(newPosition);
+        }
     }
+    float xStep, yStep;
+
 
     @Override
     public void update(){

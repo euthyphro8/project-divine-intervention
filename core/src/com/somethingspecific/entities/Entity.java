@@ -6,17 +6,17 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Entity {
 
+
+    public static final Vector2 gravity = new Vector2(0, -1f);
+
+    public Vector2 size;
     public Vector2 position;
     public Texture texture;
 
-    public Entity(Vector2 position){
-        this.position = position;
-    }
-    public Entity(float x, float y){
-        Vector2 p=new Vector2();
-        p.x = x;
-        p.y = y;
-        position = p;
+    public Entity(Texture t, float x, float y){
+        texture = t;
+        position = new Vector2(x , y);
+        size = new Vector2(texture.getWidth(), texture.getHeight());
     }
 
 

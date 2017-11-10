@@ -1,28 +1,23 @@
 package com.somethingspecific.entities;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.somethingspecific.framework.EntityManager;
 
 public class Mob extends Entity {
 
     Vector2 velocity;
+    Vector2 newPosition, collPosition;
     EntityManager ent;
 
 
-    public Mob(EntityManager ent, Vector2 position, Vector2 velocity){
-        super(position);
-        this.ent = ent;
-        this.velocity = velocity;
-    }
-    public Mob(EntityManager ent, Vector2 position){
-        super(position);
+
+    public Mob(EntityManager ent, Texture t, float x, float y){
+        super(t, x, y);
         this.ent = ent;
         velocity = new Vector2(0, 0);
-    }
-    public Mob(EntityManager ent, float x, float y){
-        super(x,y);
-        this.ent = ent;
-        velocity = new Vector2(0, 0);
+        newPosition = new Vector2(x,y);
+        collPosition = new Vector2(x,y);
     }
 
     public void setVelocity(Vector2 v){
@@ -37,10 +32,8 @@ public class Mob extends Entity {
 
     @Override
     public void update(){
-        position.x+=velocity.x;
-        position.y+=velocity.y;
-        if(position.y>0)
-            velocity.y -=1;
+        super.update();
+        newPosition.set(position);
     }
 
 

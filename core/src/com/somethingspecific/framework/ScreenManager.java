@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector3;
 
 public class ScreenManager {
 
@@ -41,9 +42,18 @@ public class ScreenManager {
 
 
     public void setPosition(float x) {
-        oc.position.set(x, oc.viewportHeight/2, 1.0f);
+        oc.position.set(x, oc.viewportHeight / 2, 1.0f);
         sb.setProjectionMatrix(oc.combined);
         oc.update();
+    }
+    public Vector3 getBounds() {
+        return oc.position;
+    }
+    public float getWidth() {
+        return oc.viewportWidth;
+    }
+    public float getHeight() {
+        return oc.viewportHeight;
     }
     public void render(Texture texture, float x, float y, float w, float h) {
 
