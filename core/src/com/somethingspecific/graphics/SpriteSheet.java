@@ -9,6 +9,7 @@ public class SpriteSheet {
 
     public static Texture bigHead;
     public static Texture hoodGod;
+    public static Texture hoodGodHit;
     public static Texture temple;
     public static Texture tiles;
 
@@ -30,6 +31,7 @@ public class SpriteSheet {
         bigHead = new Texture(Gdx.files.internal("textures/BigHead.png"));
         tiles = new Texture(Gdx.files.internal("textures/spritesheet/tiles.png"));
         hoodGod = new Texture(Gdx.files.internal("textures/hood_god.png"));
+        hoodGodHit  = new Texture(Gdx.files.internal("textures/hood_god.png"));
         temple = new Texture(Gdx.files.internal("textures/temple.png"));
 
 
