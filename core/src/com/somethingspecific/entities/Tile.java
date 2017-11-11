@@ -12,6 +12,9 @@ public class Tile {
     public final static short GRAVEL_ID	 = -10007;
 
     public final static int GRASS_COL  = 0xA1BE43FF;
+    public final static int DIRT_COL = 0xB57A23FF;
+    public final static int WATER_COL = 0x5089DFFF;
+    public final static int SAND_COL = 0XFFE991FF;
 
 
 
