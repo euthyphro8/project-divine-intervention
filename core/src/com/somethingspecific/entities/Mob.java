@@ -6,7 +6,7 @@ import com.somethingspecific.framework.EntityManager;
 
 public class Mob extends Entity {
 
-    Vector2 velocity;
+    public Vector2 velocity;
     Vector2 newPosition;
     EntityManager ent;
     boolean inAir;

@@ -27,6 +27,7 @@ public class SpriteSheet {
     public static Texture jWins;
     public static Texture fWins;
     public static Texture mHealth;
+    public static Texture cloud;
 
     //-----------------------Maps-----------------------------------//
     public static Texture one;
@@ -93,10 +94,12 @@ public class SpriteSheet {
         JOR = new CharacterSheet(JOR_IDLE, JOR_FORWARD, JOR_BACKWARD, JOR_ATTACK, JOR_IN, JOR_OUT);
 
 
+
         temple = new Texture(Gdx.files.internal("textures/temple.png"));
         house = new Texture(Gdx.files.internal("textures/house.png"));
         person = new Texture(Gdx.files.internal("textures/person.png"));
         person_2 = new Texture(Gdx.files.internal("textures/person_2.png"));
+        cloud = new Texture(Gdx.files.internal("textures/cloud.png"));
 
         background = new Texture(Gdx.files.internal("textures/background.png"));
         menu_background = new Texture(Gdx.files.internal("background.png"));

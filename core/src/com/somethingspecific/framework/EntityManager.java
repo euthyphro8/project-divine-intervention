@@ -11,6 +11,7 @@ public class EntityManager {
 
     public Monument[] monuments;
     public Player[] players;
+    public Mob[] clouds;
     public Vector2 xBounds;
     public MapManager map;
     public ScreenManager screen;
@@ -23,8 +24,19 @@ public class EntityManager {
         this.screen = screen;
         entities = new ArrayList<Entity>();
         players = new Player[2];
+        
+        clouds = new Mob[20];
         players[0] = new Player(this, 3300.0f,800.0f, SpriteSheet.JOR, 0);
         players[1] = new Player(this, 6000.0f,800.0f, SpriteSheet.FENRIR, 1);
+
+        //clouds
+        for (int i = 0;i < clouds.length;i++){
+            clouds[i] = new Mob(this, SpriteSheet.cloud, (float)(Math.random()*10000f),(float)(Math.random()*1000f+ 1000));
+            clouds[i].velocity.x = 1;
+            entities.add(clouds[i]);
+        }
+
+
 
         xBounds = new Vector2(-100000,100000);
 
