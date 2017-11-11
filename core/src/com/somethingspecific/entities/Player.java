@@ -12,6 +12,11 @@ public class Player extends Mob {
     boolean jumping = false;
     boolean dashing = false;
 
+
+    static float jumpForce = 50f;
+    static float gravityForce = -1.5f;
+    static float moveForce = 3f;
+
     public Player(EntityManager ent, float x, float y, Texture t, int playerNum){
         super(ent, t, x,y);
         this.playerNum =playerNum;
@@ -21,91 +26,65 @@ public class Player extends Mob {
 
 
 
-    public void jump() {
-        velocity.y += 20;
-    }
-    public void dashLeft(){
-        newPosition.x -=20 ;
-        dashing = true;
-    }
-
-
-
-    public void dashRight(){
-        newPosition.x += 1;
-        dashing = true;
+    public void jump(boolean jump) {
+        if(jump && !jumping && !inAir) {
+            velocity.add(0, jumpForce);
+            jumping = true;
+            inAir = true;
+        }else if(!jump){
+            jumping = false;
+        }
     }
 
     public void move(){
+        boolean dashRight = (InputManager.trigger[playerNum]<=-.5f);
+        boolean dashLeft = (InputManager.trigger[playerNum]>=.5f);
+        boolean jump = InputManager.jump[playerNum];
+        float move = InputManager.horizontal[playerNum] * moveForce;
+        jump(jump);
+
+        velocity.add(move, gravityForce);
         newPosition.set(position);
-
-
-        if(InputManager.jump[playerNum] && !jumping) {
-            jump();
-            jumping = true;
-        }
-        else if(!InputManager.jump[playerNum]){
-            jumping = false;
-        }
-        if(InputManager.trigger[playerNum]>=.5f){
-            System.out.println("{Player} triggerValue "+ InputManager.trigger[playerNum]);
-            dashLeft();
-        }else if(InputManager.trigger[playerNum]<=-.5f) {
-            System.out.println("{Player} triggerValue "+ InputManager.trigger[playerNum]);
-            dashRight();
-        }
-        else if(InputManager.trigger[playerNum]>.5||InputManager.trigger[playerNum]<-.5){
-            System.out.println("{Player} triggerValue "+ InputManager.trigger[playerNum]);
-            dashing = false;
-        }
-
-
-
-        if(velocity.x > 10) velocity.x = 10;
-        if(velocity.y > 10) velocity.y = 10;
-        if(velocity.x < -10) velocity.x = -10;
-        if(velocity.y < -10) velocity.y = -10;
-
-        velocity.add(Entity.gravity);
-        newPosition.x += InputManager.horizontal[playerNum];
         newPosition.add(velocity);
-        if(playerNum == 0)
-        System.out.println("Velocity is: " + velocity.toString() + ", position: " + position.toString() + ", newPosition: " + newPosition.toString());
 
-        int scale = 1;
-        boolean collided = false;
-        if(position.x != newPosition.x) {
-            collPosition.set(position);
-            if(position.x > newPosition.x) scale = -1;
-            for(float x = position.x; x < newPosition.x; x += (1 * scale)) {
-                collPosition.add(scale, 0);
-                if(!ent.checkCollision(collPosition, size))  {
-                    position.set(collPosition);
-                    collided = true;
-                    break;
-                }
+        float xStep = 1f;
+        if(position.x > newPosition.x) xStep = -1f;
+        while(Math.floor(position.x) != Math.floor(newPosition.x)) {
+        //while(!((newPosition.x < position.x + 0.6f) && (newPosition.x > position.x - 0.6f))) {
+            if(ent.checkCollision(this,position.x + xStep, position.y, size)) {
+                position.add(xStep, 0);
+            }else{
+                velocity.set(0, velocity.y);
+                break;
             }
-            if(!collided) position.set(collPosition);
+        }
+        float yStep = 1f;
+        if(position.y > newPosition.y) yStep = -1f;
+        while(!((newPosition.y < position.y + 0.6f) && (newPosition.y > position.y - 0.6f))) {
+            if(ent.checkCollision(this, position.x, position.y + yStep, size)) {
+                position.add(0, yStep);
+            }else{
+                if(yStep == -1) {
+                    inAir = false;
+                }
+                break;
+            }
         }
 
-        if(position.y != newPosition.y) {
-            collPosition.set(position);
-            scale = 1;
-            collided = false;
-            if (position.y > newPosition.y) scale = -1;
-            for (float y = position.y; y < newPosition.y; y += (1 * scale)) {
-                collPosition.add(0, scale);
-                if (!ent.checkCollision(collPosition, size)) {
-                    position.set(collPosition);
-                    collided = true;
-                    break;
-                }
-            }
-            if (!collided) position.set(collPosition);
-        }
-
+        friction();
+        capVelocity();
+        body.setPosition(position);
+    }
+    public void friction() {
+        velocity.set(velocity.x * 0.9f, velocity.y * 0.9f);
     }
 
+    public void capVelocity() {
+        if(velocity.x > 100) velocity.x = 100;
+        if(velocity.y > 100) velocity.y = 100;
+        if(velocity.x < -100) velocity.x = -100;
+        if(velocity.y < -100) velocity.y = -100;
+    }
 
     @Override
     public void update(){

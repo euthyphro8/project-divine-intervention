@@ -1,4 +1,6 @@
 package com.somethingspecific.entities;
+
+import com.badlogic.gdx.math.Rectangle;
 import com.somethingspecific.framework.ScreenManager;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -12,11 +14,13 @@ public class Entity {
     public Vector2 size;
     public Vector2 position;
     public Texture texture;
+    public Rectangle body;
 
     public Entity(Texture t, float x, float y){
         texture = t;
         position = new Vector2(x , y);
         size = new Vector2(texture.getWidth(), texture.getHeight());
+        body = new Rectangle(x, y, texture.getWidth(), texture.getHeight());
     }
 
 
@@ -25,6 +29,6 @@ public class Entity {
     }
 
     public void render(ScreenManager screen){
-        screen.render(texture, position.x,position.y);
+        screen.render(texture, position.x, position.y);
     }
 }

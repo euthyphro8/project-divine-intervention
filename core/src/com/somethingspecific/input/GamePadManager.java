@@ -58,23 +58,28 @@ public class GamePadManager implements ControllerListener{
     }
     @Override
     public boolean axisMoved(Controller controller, int axisCode, float value) {
-        if(Math.abs(value) < 0.05);
-
+        //Controller 1
         if(controller == pads[0]) {
             if(axisCode == 1) {
-                InputManager.horizontal[0] = value;
+                if(Math.abs(value) < 0.3) InputManager.horizontal[0] = 0;
+                else InputManager.horizontal[0] = value;
             }
             // Trigger
             if(axisCode ==4){
-                InputManager.trigger[0] = value;
+                if(Math.abs(value) < 0.3) InputManager.trigger[0] = 0;
+                else InputManager.trigger[0] = value;
             }
-        }else if(controller == pads[1]) {
+        }
+        //Controller 2
+        else if(controller == pads[1]) {
             if(axisCode == 1) {
-                InputManager.horizontal[1] = value;
+                if(Math.abs(value) < 0.3) InputManager.horizontal[1] = 0;
+                else InputManager.horizontal[1] = value;
             }
             // Trigger
             if(axisCode ==4){
-                InputManager.trigger[1] = value;
+                if(Math.abs(value) < 0.3) InputManager.trigger[1] = 0;
+                else InputManager.trigger[1] = value;
             }
         }
         return true;
