@@ -23,21 +23,21 @@ public class EntityManager {
         this.screen = screen;
         entities = new ArrayList<Entity>();
         players = new Player[2];
-        players[0] = new Player(this, 3300.0f,800.0f, SpriteSheet.HOOD_GOD, 0);
+        players[0] = new Player(this, 3300.0f,800.0f, SpriteSheet.JOR, 0);
         players[1] = new Player(this, 6000.0f,800.0f, SpriteSheet.FENRIR, 1);
 
         xBounds = new Vector2(-100000,100000);
 
         monuments = new Monument[2];
-        monuments[0] = new Monument(SpriteSheet.temple, 32, 288, 0);
-        monuments[1] = new Monument(SpriteSheet.temple, 9440, 288, 1);
+        monuments[0] = new Monument(SpriteSheet.temple, 32, 576, 0);
+        monuments[1] = new Monument(SpriteSheet.temple, 9440, 576, 1);
         entities.add(monuments[0]);
         entities.add(monuments[1]);
     }
 
 
     public void update(){
-        for(int i=0; i < players.length; i++){
+        for(int i=0; i < players.length; i++) {
             players[i].update();
         }
         screen.setPosition((players[0].position.x + players[1].position.x) / 2f);

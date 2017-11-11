@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
@@ -34,8 +35,10 @@ public class ScreenManager {
         sb.end();
     }
 
+    Vector3 newPos = new Vector3();
     public void setPosition(float x) {
-        oc.position.set(x, oc.viewportHeight / 2, 1.0f);
+        newPos.set(x, oc.viewportHeight / 2, 1.0f);
+        oc.position.interpolate(newPos, 0.1f, Interpolation.linear);
         sb.setProjectionMatrix(oc.combined);
         oc.update();
     }

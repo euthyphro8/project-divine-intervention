@@ -21,20 +21,21 @@ public class Player extends Mob {
     static float ANGLE_UP = 90f;
     static float ANGLE_DOWN = 270f;
 
-    static float jumpForce = 70f;
-    static float gravityForce = -1.75f;
+    static float jumpForce = 80f;
+    static float gravityForce = -2f;
     static float moveForce = 3f;
-    static float dashForce = 100f;
+    static float dashForce = 120f;
     static float dashWait = 0.5f;
     static float deathWait = 1.0f;
     static float attackWait =  0.4f;
-    static float attackRange = 200f;
+    static float attackRange = 300f;
 
     //Keeps track of which direction the character is facing 1 for right, -1 for left
     float dir;
     int playerNum;
     boolean jumping;
     boolean nearMonument;
+    boolean isDead;
     float dashTimer;
     float deathTimer;
     float attackTimer;
@@ -111,9 +112,11 @@ public class Player extends Mob {
             if(dash == 0)
                 return;
             else if(dash > 0) {
-                velocity.add(-dashForce, 0);
+                if (anim.lockState(AnimState.IN))
+                    velocity.add(-dashForce, 0);
             }else {
-                velocity.add(dashForce, 0);
+                if (anim.lockState(AnimState.IN))
+                    velocity.add(dashForce, 0);
             }
             dashTimer = dashWait;
         }else {
@@ -132,13 +135,50 @@ public class Player extends Mob {
                             int health = --ent.monuments[(playerNum + 1) % 2].health;
                             ent.ui.setHealth(playerNum,  health / 12f);
                         }else {
-                            ent.players[(playerNum + 1) % 2].deathTimer = deathWait;
+                            ent.players[(playerNum + 1) % 2].setDead();
                         }
                     }
                 }
             }
         }else {
             attackTimer -= Gdx.graphics.getDeltaTime();
+        }
+    }
+    public void setDead() {
+        isDead = true;
+        deathTimer = deathWait;
+        int scale = 1;
+        if(playerNum == 0) {
+            scale = -1;
+        }
+        position.add(0, 200);
+        velocity.set(1000 * scale, 0);
+        newPosition.set(position);
+        newPosition.add(velocity);
+        float xStep = 1f;
+        if(-0.9f < velocity.x  && velocity.x < 0.9f) anim.setAnim(AnimState.IDLE);
+        if(position.x > newPosition.x) xStep = -1f;
+        while(Math.floor(position.x) != Math.floor(newPosition.x)) {
+            if(ent.checkCollision(this,position.x + xStep, position.y, size)) {
+                position.add(xStep, 0);
+                if(dir < 0) {
+                    if(xStep < 0) {
+                        anim.setAnim(AnimState.FORWARD);
+                    }else {
+                        anim.setAnim(AnimState.BACKWARD);
+                    }
+                }else {
+                    if(xStep < 0) {
+                        anim.setAnim(AnimState.BACKWARD);
+                    }else {
+                        anim.setAnim(AnimState.FORWARD);
+                    }
+                }
+            }else{
+                velocity.set(0, velocity.y);
+                anim.setAnim(AnimState.IDLE);
+                break;
+            }
         }
     }
 
@@ -192,6 +232,10 @@ public class Player extends Mob {
             boolean jump = InputManager.jump[playerNum];
             boolean attack = InputManager.attack[playerNum];
             float move = InputManager.horizontal[playerNum] * moveForce;
+            if(isDead) {
+                isDead = false;
+                anim.lockState(AnimState.IN);
+            }
             move(move);
             dash(dash);
             jump(jump);
