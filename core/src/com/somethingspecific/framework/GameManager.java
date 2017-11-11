@@ -12,7 +12,7 @@ public class GameManager {
     UIManager uiManager;
 
     public GameManager(LoadManager assets) {
-        mapManager = new MapManager(SpriteSheet.one);
+        mapManager = new MapManager(SpriteSheet.two);
         entityManager = new EntityManager(mapManager);
         uiManager = new UIManager();
     }
