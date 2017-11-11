@@ -41,8 +41,9 @@ public class EntityManager {
         xBounds = new Vector2(-100000,100000);
 
         monuments = new Monument[2];
-        monuments[0] = new Monument(SpriteSheet.temple, 32, 576, 0);
-        monuments[1] = new Monument(SpriteSheet.temple, 9440, 576, 1);
+        monuments[0] = new Monument(SpriteSheet.temple, 64, 576,
+                0);
+        monuments[1] = new Monument(SpriteSheet.temple, 9344, 576, 1);
         entities.add(monuments[0]);
         entities.add(monuments[1]);
     }

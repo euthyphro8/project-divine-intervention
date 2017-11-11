@@ -58,7 +58,8 @@ public class GamePadManager implements ControllerListener{
             if(buttonCode == 0){
                 InputManager.jump[1] = false;
             }else if(buttonCode == 2) {
-                InputManager.attack[1] = false;
+                InputManager.attack[1] = false
+                                       ;
             }
 
         }
