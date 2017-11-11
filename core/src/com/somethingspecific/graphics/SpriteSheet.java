@@ -56,10 +56,10 @@ public class SpriteSheet {
 
 
         grass = new TextureRegion(tiles, 0, 0, 32, 32);
-        dirt = new TextureRegion(tiles, 99, 0, 32, 32);
-        sand = new TextureRegion(tiles, 99, 33, 32, 32);
-        water = new TextureRegion(tiles, 33, 33, 32, 32);
-        space = new TextureRegion(tiles, 33, 0, 32, 32);
+        dirt = new TextureRegion(tiles, 96, 0, 32, 32);
+        sand = new TextureRegion(tiles, 96, 32, 32, 32);
+        water = new TextureRegion(tiles, 32, 32, 32, 32);
+        space = new TextureRegion(tiles, 32, 0, 32, 32);
 
     }
 

@@ -11,14 +11,14 @@ import com.somethingspecific.input.InputManager;
 
 public class Player extends Mob {
 
-    static float jumpForce = 60f;
+    static float jumpForce = 70f;
     static float gravityForce = -1.75f;
     static float moveForce = 3f;
     static float dashForce = 100f;
     static float dashWait = 0.5f;
     static float deathWait = 1.0f;
     static float attackLength = 2.0f; //Length of vector that is shot out to detect a hit
-    static float attackWait =  0.3f;
+    static float attackWait =  0.4f;
 
     int playerNum;
     boolean jumping;

@@ -24,10 +24,10 @@ public class MapManager {
         Pixmap p = map.getTextureData().consumePixmap();
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
-                if(p.getPixel(x,y) == Tile.GRASS_COL) tiles[(width - x - 1) + ((height - y - 1) * width)] = Tile.GRASS_ID;
-                if(p.getPixel(x,y) == Tile.DIRT_COL) tiles[(width - x - 1) + ((height - y - 1) * width)] = Tile.DIRT_ID;
-                if(p.getPixel(x,y) == Tile.SAND_COL) tiles[(width - x - 1) + ((height - y - 1) * width)] = Tile.SAND_ID;
-                if(p.getPixel(x,y) == Tile.WATER_COL) tiles[(width - x - 1) + ((height - y - 1) * width)] = Tile.WATER_ID;
+                if(p.getPixel(x,y) == Tile.GRASS_COL) tiles[x + ((height - y - 1) * width)] = Tile.GRASS_ID;
+                if(p.getPixel(x,y) == Tile.DIRT_COL) tiles[x + ((height - y - 1) * width)] = Tile.DIRT_ID;
+                if(p.getPixel(x,y) == Tile.SAND_COL) tiles[x + ((height - y - 1) * width)] = Tile.SAND_ID;
+                if(p.getPixel(x,y) == Tile.WATER_COL) tiles[x + ((height - y - 1) * width)] = Tile.WATER_ID;
 
             }
         }
