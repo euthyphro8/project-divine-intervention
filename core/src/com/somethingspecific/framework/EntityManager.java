@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class EntityManager {
 
 
-    public Entity[] players;
+    public Player[] players;
     public Vector2 xBounds;
     MapManager map;
     ArrayList<Entity> entities;
@@ -17,9 +17,9 @@ public class EntityManager {
     public EntityManager(MapManager map){
         this.map = map;
         entities = new ArrayList<Entity>();
-        players = new Entity[2];
-        players[0] = new Player(this, 200.0f,200.0f, SpriteSheet.bigHead, 0);
-        players[1] = new Player(this, 800.0f,200.0f,SpriteSheet.bigHead, 1);
+        players = new Player[2];
+        players[0] = new Player(this, 200.0f,800.0f, SpriteSheet.HOOD_GOD, 0);
+        players[1] = new Player(this, 800.0f,800.0f, SpriteSheet.HOOD_GOD, 1);
         xBounds = new Vector2(-100000,100000);
     }
 

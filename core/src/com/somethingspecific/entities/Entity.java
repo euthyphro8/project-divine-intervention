@@ -19,8 +19,11 @@ public class Entity {
     public Entity(Texture t, float x, float y){
         texture = t;
         position = new Vector2(x , y);
-        size = new Vector2(texture.getWidth(), texture.getHeight());
-        body = new Rectangle(x, y, texture.getWidth(), texture.getHeight());
+        if(t !=null) {
+            size = new Vector2(texture.getWidth(), texture.getHeight());
+            body = new Rectangle(x, y, texture.getWidth(), texture.getHeight());
+        }
+        else System.out.println("[Entity] WARNING: SIZE and BODY are null, be sure to set them elsewhere.");
     }
 
 

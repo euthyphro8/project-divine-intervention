@@ -12,12 +12,9 @@ public class SpriteSheet {
 
     public static CharacterSheet HOOD_GOD, FENRIR;
 
-    public static Texture bigHead;
-    public static Texture hoodGod;
-    public static Texture hoodGodHit;
-    public static Texture temple;
 
     //------------------------Background-------------------------------------//
+    public static Texture temple;
     public static Texture house;
     public static Texture person;
     public static Texture person_2;
@@ -27,8 +24,6 @@ public class SpriteSheet {
     public static Texture two;
 
 
-    //------------------------TileSheet---------------------------//
-    public static Texture tiles;
 
     //------------------------Tiles----------------------------------//
     public static TextureRegion grass;
@@ -41,20 +36,29 @@ public class SpriteSheet {
 
 
     public static void init() {
-        bigHead = new Texture(Gdx.files.internal("textures/BigHead.png"));
-        tiles = new Texture(Gdx.files.internal("textures/spritesheet/tiles.png"));
-        hoodGod = new Texture(Gdx.files.internal("textures/hood_god.png"));
-        hoodGodHit  = new Texture(Gdx.files.internal("textures/hood_god.png"));
+        Texture tiles = new Texture(Gdx.files.internal("textures/spritesheet/tiles.png"));
+
+
+        //---------------------------------------HOOD GOD-----------------------------------------------------//
+        Texture HOOD_GOD_SHEET = new Texture(Gdx.files.internal("textures/spritesheet/hoodGod.png"));
+
+        TextureRegion[] HOOD_GOD_IDLE = {
+                new TextureRegion(HOOD_GOD_SHEET, 0,0, 200, 320)
+        };
+        TextureRegion[] HOOD_GOD_FORWARD = {
+                new TextureRegion(HOOD_GOD_SHEET, 0,324, 200, 320)
+        };
+        TextureRegion[] HOOD_GOD_BACKWARD = {
+                new TextureRegion(HOOD_GOD_SHEET, 0,648, 200, 320)
+        };
+        TextureRegion[] HOOD_GOD_ATTACK = {
+                new TextureRegion(HOOD_GOD_SHEET, 0,972, 200, 320)
+        };
+
+        HOOD_GOD = new CharacterSheet(HOOD_GOD_IDLE, HOOD_GOD_FORWARD, HOOD_GOD_BACKWARD, HOOD_GOD_ATTACK);
+
+
         temple = new Texture(Gdx.files.internal("textures/temple.png"));
-
-
-//        TODO: Implement character animations
-//        Texture hoodGodSheet = new Texture(Gdx.files.internal("textures/BigHead.png"));
-//        HOOD_GOD = new CharacterSheet(
-//
-//        )
-
-
         house = new Texture(Gdx.files.internal("textures/house.png"));
         person = new Texture(Gdx.files.internal("textures/person.png"));
         person_2 = new Texture(Gdx.files.internal("textures/person_2.png"));

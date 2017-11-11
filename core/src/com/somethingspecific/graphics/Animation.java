@@ -12,20 +12,22 @@ public class Animation {
 
     TextureRegion[] idle, forward, backward, attack;
     AnimState state;
+    boolean stateLocked;
     int frameCount;
     int currentFrame;
     float frameTimer;
 
 
-    public Animation(TextureRegion[] idle, TextureRegion[] forward, TextureRegion[] backward, TextureRegion[] attack) {
-        this.idle = idle;
-        this.forward = forward;
-        this.backward = backward;
-        this.attack = attack;
+    public Animation(CharacterSheet c) {
+        this.idle = c.idle;
+        this.forward = c.forward;
+        this.backward = c.backward;
+        this.attack = c.attack;
         state = AnimState.IDLE;
     }
 
     public void setAnim(AnimState state) {
+        if(stateLocked) return;
         this.state = state;
         if(state == AnimState.IDLE) {
             frameCount = idle.length;
@@ -37,24 +39,36 @@ public class Animation {
             frameCount = attack.length;
         }
     }
-
+    public void lockState(AnimState state) {
+        if(!stateLocked) {
+            setAnim(state);
+            stateLocked = true;
+        }
+    }
     public void update() {
         if(frameTimer <= 0) {
-            currentFrame = (currentFrame + 1) % frameCount;
+            currentFrame = currentFrame + 1;
+            if(currentFrame == frameCount) {
+                stateLocked = false;
+                currentFrame %= frameCount;
+            }
             frameTimer = frameDuration;
         }else {
             frameTimer -= Gdx.graphics.getDeltaTime();
         }
     }
     public void render(ScreenManager screen, Vector2 position, Vector2 size, float scaleX) {
+        float x = position.x;
+        float y = position.y;
+        if(scaleX < 0) x -= (size.x * scaleX);
         if(state == AnimState.IDLE) {
-            screen.render(idle[currentFrame], position, size, scaleX, 1f);
+            screen.render(idle[currentFrame], x, y, size, scaleX, 1f);
         }else if(state == AnimState.FORWARD) {
-            screen.render(forward[currentFrame], position, size, scaleX, 1f);
+            screen.render(forward[currentFrame], x, y, size, scaleX, 1f);
         }else if(state == AnimState.BACKWARD) {
-            screen.render(backward[currentFrame], position, size, scaleX, 1f);
+            screen.render(backward[currentFrame], x, y, size, scaleX, 1f);
         }else if(state == AnimState.ATTACK) {
-            screen.render(attack[currentFrame], position, size, scaleX, 1f);
+            screen.render(attack[currentFrame], x, y, size, scaleX, 1f);
         }
 
     }
