@@ -68,23 +68,6 @@ public class EntityManager {
                     return false;
             }
         }
-
-//        for(Entity e : entities) {
-//            if(entity.equals(e)) continue;
-//            if(e.body.contains(entity.body))
-//                return false;
-//        }
-//        //Player Collision
-//
-//        for(int i = 0; i < players.length; i++) {
-////            if(entity.equals(e)) continue;
-//            Entity e = players[i];
-////            System.out.println(e.body.toString() + "," + entity.body.toString());
-//            if(e.body.contains(entity.body)) {
-//
-//                return false;
-//            }
-//        }
         return true;
     }
 }

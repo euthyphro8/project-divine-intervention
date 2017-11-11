@@ -9,6 +9,9 @@ public class SpriteSheet {
 
 
     //-----------------------Character----------------------------//
+
+    public static CharacterSheet HOOD_GOD, FENRIR;
+
     public static Texture bigHead;
     public static Texture hoodGod;
     public static Texture hoodGodHit;
@@ -37,13 +40,19 @@ public class SpriteSheet {
 
 
 
-
     public static void init() {
         bigHead = new Texture(Gdx.files.internal("textures/BigHead.png"));
         tiles = new Texture(Gdx.files.internal("textures/spritesheet/tiles.png"));
         hoodGod = new Texture(Gdx.files.internal("textures/hood_god.png"));
         hoodGodHit  = new Texture(Gdx.files.internal("textures/hood_god.png"));
         temple = new Texture(Gdx.files.internal("textures/temple.png"));
+
+
+//        TODO: Implement character animations
+//        Texture hoodGodSheet = new Texture(Gdx.files.internal("textures/BigHead.png"));
+//        HOOD_GOD = new CharacterSheet(
+//
+//        )
 
 
         house = new Texture(Gdx.files.internal("textures/house.png"));

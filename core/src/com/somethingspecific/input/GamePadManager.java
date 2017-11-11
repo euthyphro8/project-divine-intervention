@@ -29,13 +29,17 @@ public class GamePadManager implements ControllerListener{
     @Override
     public boolean buttonDown(Controller controller, int buttonCode) {
         if(controller == pads[0]) {
-            if(buttonCode == 0){
+            if(buttonCode == 0) {
                 InputManager.jump[0] = true;
+            }else if(buttonCode == 2) {
+                InputManager.attack[0] = true;
             }
 
         }else if(controller == pads[1]) {
             if(buttonCode == 0){
                 InputManager.jump[1] = true;
+            }else if(buttonCode == 2) {
+                InputManager.attack[1] = true;
             }
 
         }
@@ -46,11 +50,15 @@ public class GamePadManager implements ControllerListener{
         if(controller == pads[0]) {
             if(buttonCode == 0){
                 InputManager.jump[0] = false;
+            }else if(buttonCode == 2) {
+                InputManager.attack[0] = false;
             }
 
         }else if(controller == pads[1]) {
             if(buttonCode == 0){
                 InputManager.jump[1] = false;
+            }else if(buttonCode == 2) {
+                InputManager.attack[1] = false;
             }
 
         }
