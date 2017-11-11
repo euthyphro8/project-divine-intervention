@@ -1,7 +1,9 @@
 package com.somethingspecific.desktop;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.graphics.Texture;
 import com.somethingspecific.Master;
 
 public class DesktopLauncher {
@@ -13,5 +15,6 @@ public class DesktopLauncher {
 
 		config.fullscreen = true;
 		config.title = "Divine Intervention";
+//		config.addIcon("icon.png", Gdx.files.);
 	}
 }

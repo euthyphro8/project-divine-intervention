@@ -34,6 +34,7 @@ public class Player extends Mob {
     float dir;
     int playerNum;
     boolean jumping;
+    boolean nearMonument;
     float dashTimer;
     float deathTimer;
     float attackTimer;
@@ -127,7 +128,12 @@ public class Player extends Mob {
                 if(ent.players[(playerNum + 1) % 2].deathTimer <= 0) {
                     double dist = position.dst(target);
                     if (dist < attackRange) {
-                        ent.players[(playerNum + 1) % 2].deathTimer = deathWait;
+                        if(nearMonument) {
+                            int health = --ent.monuments[(playerNum + 1) % 2].health;
+                            ent.ui.setHealth(playerNum,  health / 12f);
+                        }else {
+                            ent.players[(playerNum + 1) % 2].deathTimer = deathWait;
+                        }
                     }
                 }
             }
@@ -139,8 +145,18 @@ public class Player extends Mob {
 
 
     public void updateDirection() {
-        Vector2 otherP = ent.players[(playerNum + 1) % 2].position;
-        Vector2 otherS = ent.players[(playerNum + 1) % 2].size;
+        Vector2 otherP;
+        Vector2 otherS;
+        Vector2 monP = ent.monuments[(playerNum + 1) % 2].position;
+        if(position.dst(monP) < attackRange * 2) {
+            otherP = monP;
+            otherS = ent.monuments[(playerNum + 1) % 2].size;
+            nearMonument = true;
+        }else {
+            otherP = ent.players[(playerNum + 1) % 2].position;
+            otherS = ent.players[(playerNum + 1) % 2].size;
+            nearMonument = false;
+        }
         target.set(position.x + (size.x / 2f), position.y + (size.y / 2f));
         target.sub(otherP.x + (otherS.x / 2f), otherP.y + (otherS.y / 2f));
         target.setLength(attackRange);

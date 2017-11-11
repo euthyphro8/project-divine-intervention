@@ -2,6 +2,7 @@ package com.somethingspecific.framework;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.somethingspecific.entities.Tile;
 import com.somethingspecific.graphics.SpriteSheet;
 
@@ -13,9 +14,11 @@ public class MapManager {
     public short[] tiles;
     public int width;
     public int height;
+    public Texture bkgnd;
 
 
     public MapManager(Texture map){
+        bkgnd = SpriteSheet.background;
         width = map.getWidth();
         height = map.getHeight();
         tiles = new short[width * height];
@@ -38,6 +41,7 @@ public class MapManager {
     }
 
     public void render(ScreenManager screen){
+        screen.renderFixed(bkgnd, 0, 0, screen.oc.viewportWidth, screen.oc.viewportHeight);
         for(int y = 0; y < height; y++) {
             for(int x = 0; x < width; x++) {
                 if(tiles[x + (y * width)] == Tile.GRASS_ID) screen.render(SpriteSheet.grass, (x * tilesize), (y * tilesize));

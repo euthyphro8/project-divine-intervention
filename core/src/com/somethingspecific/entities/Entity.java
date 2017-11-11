@@ -8,9 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Entity {
 
-
-    public static final Vector2 gravity = new Vector2(0, -1f);
-
     public Vector2 size;
     public Vector2 position;
     public Texture texture;

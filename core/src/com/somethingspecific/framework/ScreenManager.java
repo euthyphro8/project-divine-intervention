@@ -11,13 +11,13 @@ import com.badlogic.gdx.math.Vector3;
 
 public class ScreenManager {
 
+    public OrthographicCamera oc;
     SpriteBatch sb;
-    OrthographicCamera oc;
 
     public ScreenManager() {
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
-        oc = new OrthographicCamera(1920 * 2, 1920 * 2 * (height / width));
+        oc = new OrthographicCamera(width * 2, width * 2 * (height / width));
         oc.position.set(oc.viewportWidth / 2f, oc.viewportHeight/2, 0);
         oc.update();
         sb = new SpriteBatch();
@@ -27,7 +27,7 @@ public class ScreenManager {
         oc.update();
         sb.setProjectionMatrix(oc.combined);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl20.glClearColor(0.2f, 0.75f, 0.98f, 1.0f);
+        Gdx.gl20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         sb.begin();
     }
     public void stop() {
@@ -39,15 +39,6 @@ public class ScreenManager {
         sb.setProjectionMatrix(oc.combined);
         oc.update();
     }
-    public Vector3 getBounds() {
-        return oc.position;
-    }
-    public float getWidth() {
-        return oc.viewportWidth;
-    }
-    public float getHeight() {
-        return oc.viewportHeight;
-    }
     public void render(Texture texture, float x, float y, float w, float h) {
         sb.draw(texture, x, y, w, h);
     }
@@ -57,6 +48,9 @@ public class ScreenManager {
     }
     public void render(Texture texture, float x, float y) {
         sb.draw(texture, x, y);
+    }
+    public void renderFixed(Texture texture, float x, float y, float w, float h) {
+        sb.draw(texture, x  + oc.position.x - (oc.viewportWidth / 2f), y + oc.position.y - (oc.viewportHeight / 2f), w, h);
     }
     public void render(Texture texture, Vector2 position) {
         sb.draw(texture, position.x, position.y);
@@ -71,5 +65,7 @@ public class ScreenManager {
     public void render(TextureRegion texture, float x, float y, Vector2 size, float xScale, float yScale) {
         sb.draw(texture, x, y, 0, 0, size.x, size.y, xScale, yScale, 0);
     }
+
+
 
 }

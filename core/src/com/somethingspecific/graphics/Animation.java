@@ -8,7 +8,7 @@ import com.somethingspecific.framework.ScreenManager;
 
 public class Animation {
 
-    static float frameDuration = 0.1f;
+    static float frameDuration = 0.05f;
 
     TextureRegion[] idle, forward, backward, attack;
     AnimState state;

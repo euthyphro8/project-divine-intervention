@@ -1,29 +1,28 @@
 package com.somethingspecific.framework;
 
 
-import com.badlogic.gdx.math.Vector2;
 import com.somethingspecific.graphics.SpriteSheet;
 
 public class GameManager {
 
 
-    EntityManager entityManager;
-    MapManager mapManager;
-    UIManager uiManager;
+    EntityManager ent;
+    MapManager map;
+    UIManager ui;
 
-    public GameManager(LoadManager assets) {
-        mapManager = new MapManager(SpriteSheet.two);
-        entityManager = new EntityManager(mapManager);
-        uiManager = new UIManager();
+    public GameManager(ScreenManager screen) {
+        ui = new UIManager();
+        map = new MapManager(SpriteSheet.valleys);
+        ent = new EntityManager(map, ui, screen);
     }
 
     public void update(){
-        entityManager.update();
-
+        ent.update();
     }
 
     public void render(ScreenManager screen){
-        mapManager.render(screen);
-        entityManager.render(screen);
+        map.render(screen);
+        ent.render(screen);
+        ui.render(screen);
     }
 }
