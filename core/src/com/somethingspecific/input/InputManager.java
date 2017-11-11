@@ -8,6 +8,7 @@ public class InputManager {
 
     public static float[] vertical, horizontal;
     public static boolean[] jump;
+    public static boolean[] attack;
     public static float[] trigger;
 
     public static void init() {
@@ -17,14 +18,13 @@ public class InputManager {
         vertical = new float[2];
 
         jump = new boolean[2];
+        attack = new boolean[2];
         trigger = new float[2];
     }
 
     public static void update() {
 
     }
-
-
 
 
 }

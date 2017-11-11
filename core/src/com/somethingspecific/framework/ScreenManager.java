@@ -14,8 +14,6 @@ public class ScreenManager {
     SpriteBatch sb;
     OrthographicCamera oc;
 
-
-
     public ScreenManager() {
         float width = Gdx.graphics.getWidth();
         float height = Gdx.graphics.getHeight();
@@ -27,19 +25,14 @@ public class ScreenManager {
 
     public void start() {
         oc.update();
-
         sb.setProjectionMatrix(oc.combined);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl20.glClearColor(0.1f, 0.5f, 0.8f, 1.0f);
-
         sb.begin();
-
-
     }
     public void stop() {
         sb.end();
     }
-
 
     public void setPosition(float x) {
         oc.position.set(x, oc.viewportHeight / 2, 1.0f);
@@ -59,6 +52,7 @@ public class ScreenManager {
 
         sb.draw(texture, x, y, w, h);
     }
+
     public void render(TextureRegion texture, float x, float y) {
         sb.draw(texture, x, y);
     }
@@ -71,4 +65,12 @@ public class ScreenManager {
     public void render(TextureRegion texture, Vector2 position) {
         sb.draw(texture, position.x, position.y);
     }
+
+//    public void render(Texture texture, Vector2 position, Vector2 size, float xScale, float yScale) {
+//        sb.draw(texture, position.x, position.y, 0, 0, size.x, size.y, xScale, yScale, 0);
+//    }
+    public void render(TextureRegion texture, Vector2 position, Vector2 size, float xScale, float yScale) {
+        sb.draw(texture, position.x, position.y, 0, 0, size.x, size.y, xScale, yScale, 0);
+    }
+
 }
