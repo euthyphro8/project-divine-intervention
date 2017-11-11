@@ -66,7 +66,7 @@ public class GamePadManager implements ControllerListener{
             }
             // Trigger
             if(axisCode ==4){
-                if(Math.abs(value) < 0.3) InputManager.trigger[0] = 0;
+                if(Math.abs(value) < 0.1) InputManager.trigger[0] = 0;
                 else InputManager.trigger[0] = value;
             }
         }
@@ -78,7 +78,7 @@ public class GamePadManager implements ControllerListener{
             }
             // Trigger
             if(axisCode ==4){
-                if(Math.abs(value) < 0.3) InputManager.trigger[1] = 0;
+                if(Math.abs(value) < 0.1) InputManager.trigger[1] = 0;
                 else InputManager.trigger[1] = value;
             }
         }

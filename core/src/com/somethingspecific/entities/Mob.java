@@ -19,15 +19,6 @@ public class Mob extends Entity {
         newPosition = new Vector2(x,y);
     }
 
-    public void setVelocity(Vector2 v){
-        velocity = v;
-    }
-    public void setXVelocity(float x){
-        velocity.x = x;
-    }
-    public void setYVelocity(float y){
-        velocity.y = y;
-    }
 
     @Override
     public void update(){

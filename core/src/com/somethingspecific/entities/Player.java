@@ -1,5 +1,6 @@
 package com.somethingspecific.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.somethingspecific.framework.EntityManager;
@@ -8,14 +9,18 @@ import com.somethingspecific.input.GamePadManager;
 import com.somethingspecific.input.InputManager;
 
 public class Player extends Mob {
-    int playerNum;
-    boolean jumping = false;
-    boolean dashing = false;
 
-
-    static float jumpForce = 50f;
-    static float gravityForce = -1.5f;
+    static float jumpForce = 60f;
+    static float gravityForce = -1.75f;
     static float moveForce = 3f;
+    static float dashForce = 100f;
+    static float dashWait = 0.5f;
+
+    int playerNum;
+    boolean jumping;
+    float dashTimer;
+
+
 
     public Player(EntityManager ent, float x, float y, Texture t, int playerNum){
         super(ent, t, x,y);
@@ -24,23 +29,11 @@ public class Player extends Mob {
 
 
 
-
-
-    public void jump(boolean jump) {
-        if(jump && !jumping && !inAir) {
-            velocity.add(0, jumpForce);
-            jumping = true;
-            inAir = true;
-        }else if(!jump){
-            jumping = false;
-        }
-    }
-
     public void move(){
-        boolean dashRight = (InputManager.trigger[playerNum]<=-.5f);
-        boolean dashLeft = (InputManager.trigger[playerNum]>=.5f);
+        float dash = InputManager.trigger[playerNum];
         boolean jump = InputManager.jump[playerNum];
         float move = InputManager.horizontal[playerNum] * moveForce;
+        dash(dash);
         jump(jump);
 
         velocity.add(move, gravityForce);
@@ -75,8 +68,32 @@ public class Player extends Mob {
         capVelocity();
         body.setPosition(position);
     }
+
+    public void jump(boolean jump) {
+        if(jump && !jumping && !inAir) {
+            velocity.add(0, jumpForce);
+            jumping = true;
+            inAir = true;
+        }else if(!jump){
+            jumping = false;
+        }
+    }
+    public void dash(float dash) {
+        if(dashTimer <= 0f) {
+            if(dash == 0)
+                return;
+            else if(dash > 0) {
+                velocity.add(-dashForce, 0);
+            }else {
+                velocity.add(dashForce, 0);
+            }
+            dashTimer = dashWait;
+        }else {
+            dashTimer -= Gdx.graphics.getDeltaTime();
+        }
+    }
     public void friction() {
-        velocity.set(velocity.x * 0.9f, velocity.y * 0.9f);
+        velocity.set(velocity.x * 0.7f, velocity.y * 0.9f);
     }
 
     public void capVelocity() {
