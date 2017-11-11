@@ -7,11 +7,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class SpriteSheet {
 
+
+    //-----------------------Character----------------------------//
     public static Texture bigHead;
     public static Texture hoodGod;
     public static Texture hoodGodHit;
     public static Texture temple;
-    public static Texture tiles;
 
     //------------------------Background-------------------------------------//
     public static Texture house;
@@ -22,10 +23,16 @@ public class SpriteSheet {
     public static Texture one;
 
 
+    //------------------------TileSheet---------------------------//
+    public static Texture tiles;
 
     //------------------------Tiles----------------------------------//
     public static TextureRegion grass;
     public static TextureRegion space;
+
+
+
+
 
     public static void init() {
         bigHead = new Texture(Gdx.files.internal("textures/BigHead.png"));

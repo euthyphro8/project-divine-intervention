@@ -1,4 +1,5 @@
 package com.somethingspecific.framework;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.somethingspecific.entities.*;
 import com.somethingspecific.graphics.SpriteSheet;
@@ -17,59 +18,106 @@ public class EntityManager {
         this.map = map;
         entities = new ArrayList<Entity>();
         players = new Entity[2];
-        players[0] = new Player(this, 100.0f,200.0f, SpriteSheet.bigHead, 0);
-        players[1] = new Player(this, 300.0f,200.0f,SpriteSheet.bigHead, 1);
+        players[0] = new Player(this, 200.0f,200.0f, SpriteSheet.bigHead, 0);
+        players[1] = new Player(this, 800.0f,200.0f,SpriteSheet.bigHead, 1);
         xBounds = new Vector2(-100000,100000);
     }
 
 
     public void update(){
-        for(int i=0;i<players.length;i++){
+        for(int i=0; i < players.length; i++){
             players[i].update();
         }
     }
 
     public void render(ScreenManager screen){
-        screen.setPosition((players[0].position.x+ players[1].position.x)/2);
+        screen.setPosition((players[0].position.x + players[1].position.x) / 2f);
         xBounds.set(screen.getBounds().x, screen.getBounds().x + screen.getWidth());
+//        System.out.println(xBounds.toString());
+
 
         for(int i = 0; i < players.length; i++){
             players[i].render(screen);
         }
     }
 
-    public boolean checkCollision(Vector2 position, Vector2 size) {
-        float x0 = position.x;
-        float x1 = position.x + size.x;
-        float y0 = position.y;
-        float y1 = position.y + size.y;
+    public boolean checkCollision(Entity entity, float x, float y, Vector2 size) {
+        entity.body.setPosition(x, y);
+        float x0 = x;
+        float x1 = x0 + size.x;
+        float y0 = y; //(y - (size.y / 2f));
+        float y1 = y0 + size.y;
         //Screen Collision
-        if(x0 < xBounds.x) return false;
-        if(x1 > xBounds.y) return false;
+//        if(x0 < xBounds.x) return false;
+//        if(x1 > xBounds.y) return false;
         //Tile Collision
-        for(int y = 0; y < map.height; y++) {
-            for(int x = 0; x < map.width; x++) {
-                if(map.tiles[x + ( y * map.width)] >= 0) continue;
-                if(x0 < (x * MapManager.tilesize) && x1 > (x * MapManager.tilesize) && y0 < (y * MapManager.tilesize) && y1 > (y * MapManager.tilesize))
+        for(int ty = 0; ty < map.height; ty++) {
+            for(int tx = 0; tx < map.width; tx++) {
+                if(map.tiles[tx + ( ty * map.width)] >= 0) continue;
+                float tx0 = (tx * MapManager.tilesize); //- (MapManager.tilesize / 2f);
+                float tx1 = tx0 + (MapManager.tilesize);
+                float ty0 = (ty * MapManager.tilesize);// - (MapManager.tilesize / 2f);
+                float ty1 = ty0 + (MapManager.tilesize);
+                if(x0 <= tx0 && x1 > tx0 && y0 <= ty0 && y1 > ty0)
                     return false;
-                if((x * MapManager.tilesize) < x0 && (x * MapManager.tilesize) + MapManager.tilesize > x1 && (y * MapManager.tilesize) < y0 && (y * MapManager.tilesize) + MapManager.tilesize > y1)
+                if(x0 <= tx1 && x1 > tx1 && y0 <= ty1 && y1 > ty1)
+                    return false;
+                if(x0 <= tx0 && x1 > tx0 && y0 <= ty1 && y1 > ty1)
+                    return false;
+                if(x0 <= tx1 && x1 > tx1 && y0 <= ty0 && y1 > ty0)
                     return false;
             }
         }
-        //Entity Collision
+
         for(Entity e : entities) {
-           if(x0 < e.position.x && x1 > e.position.x && y0 < e.position.y && y1 > e.position.y)
-               return false;
-           if(e.position.x < x0 && e.position.x + e.texture.getWidth() > x1 && e.position.y < y0 && e.position.y + e.texture.getHeight() > y1)
-               return false;
+            if(entity.equals(e)) continue;
+            if(e.body.contains(entity.body))
+                return false;
         }
         //Player Collision
-        for(Entity e : players) {
-            if(x0 < e.position.x && x1 > e.position.x && y0 < e.position.y && y1 > e.position.y)
+
+        for(int i = 0; i < players.length; i++) {
+//            if(entity.equals(e)) continue;
+            Entity e = players[i];
+            System.out.println(e.body.toString() + "," + entity.body.toString());
+            if(e.body.contains(entity.body)) {
+
                 return false;
-            if(e.position.x < x0 && e.position.x + e.texture.getWidth() > x1 && e.position.y < y0 && e.position.y + e.texture.getHeight() > y1)
-                return false;
+            }
         }
+
+        //Entity Collision
+//        for(Entity e : entities) {
+//            if(entity.equals(e)) continue;
+//            float ex0 = e.position.x;// - (e.size.x / 2f);
+//            float ex1 = ex0 + e.size.x;
+//            float ey0 = e.position.y;// - (e.size.y / 2f);
+//            float ey1 = ey0 + e.size.y;
+//            if(x0 <= ex0 && x1 > ex0 && y0 < ey0 && y1 > ey0)
+//                return false;
+//            if(x0 <= ex1 && x1 > ex1 && y0 < ey1 && y1 > ey1)
+//                return false;
+//            if(x0 < ex0 && x1 > ex0 && y0 < ey1 && y1 > ey1)
+//                return false;
+//            if(x0 < ex1 && x1 > ex1 && y0 < ey0 && y1 > ey0)
+//                return false;
+//        }
+//        //Player Collision
+//        for(Entity e : players) {
+//            if(entity.equals(e)) {
+//                continue;
+//            }
+//            float ex0 = e.position.x;// - (e.size.x / 2f);
+//            float ex1 = ex0 + e.size.x;
+//            float ey0 = e.position.y;// - (e.size.y / 2f);
+//            float ey1 = ey0 + e.size.y;
+//            if(x0 <= ex0 && x1 > ex0 && y0 < ey0 && y1 > ey0) {
+//                System.out.println(entity.position.toString() + ", " + e.position.toString());
+//                return false;
+//            }
+//            if(x0 <= ex1 && x1 > ex1 && y0 < ey1 && y1 > ey1)
+//                return false;
+//        }
         return true;
     }
 }
