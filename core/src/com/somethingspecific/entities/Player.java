@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.somethingspecific.framework.EntityManager;
+import com.somethingspecific.framework.ScreenManager;
 import com.somethingspecific.graphics.SpriteSheet;
 import com.somethingspecific.input.GamePadManager;
 import com.somethingspecific.input.InputManager;
@@ -15,16 +16,21 @@ public class Player extends Mob {
     static float moveForce = 3f;
     static float dashForce = 100f;
     static float dashWait = 0.5f;
+    static float deathWait = 1.0f;
+    static float attackLength = 2.0f; //Length of vector that is shot out to detect a hit
+    static float attackWait =  0.3f;
 
     int playerNum;
     boolean jumping;
     float dashTimer;
-
+    float deathTimer;
+    Vector2 target ;
 
 
     public Player(EntityManager ent, float x, float y, Texture t, int playerNum){
         super(ent, t, x,y);
         this.playerNum =playerNum;
+        target = new Vector2();
     }
 
 
@@ -105,8 +111,23 @@ public class Player extends Mob {
 
     @Override
     public void update(){
-        super.update();
-        move();
+        if(deathTimer <= 0) {
+            super.update();
+            move();
+        }else {
+            deathTimer -= Gdx.graphics.getDeltaTime();
+        }
+    }
+
+    @Override
+    public void render(ScreenManager screen) {
+        if(deathTimer <= 0) {
+            super.render(screen);
+        }
+    }
+
+    public void getAttackVector() {
+        target.set(ent.players[(playerNum + 1) % 2].position).sub(position).nor().setLength(attackLength);
     }
 
 }

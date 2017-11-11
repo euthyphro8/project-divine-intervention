@@ -9,10 +9,10 @@ import java.util.ArrayList;
 public class EntityManager {
 
 
+    public Entity[] players;
+    public Vector2 xBounds;
     MapManager map;
     ArrayList<Entity> entities;
-    Entity[] players;
-    Vector2 xBounds;
 
     public EntityManager(MapManager map){
         this.map = map;
@@ -69,54 +69,21 @@ public class EntityManager {
             }
         }
 
-        for(Entity e : entities) {
-            if(entity.equals(e)) continue;
-            if(e.body.contains(entity.body))
-                return false;
-        }
-        //Player Collision
-
-        for(int i = 0; i < players.length; i++) {
-//            if(entity.equals(e)) continue;
-            Entity e = players[i];
-            System.out.println(e.body.toString() + "," + entity.body.toString());
-            if(e.body.contains(entity.body)) {
-
-                return false;
-            }
-        }
-
-        //Entity Collision
 //        for(Entity e : entities) {
 //            if(entity.equals(e)) continue;
-//            float ex0 = e.position.x;// - (e.size.x / 2f);
-//            float ex1 = ex0 + e.size.x;
-//            float ey0 = e.position.y;// - (e.size.y / 2f);
-//            float ey1 = ey0 + e.size.y;
-//            if(x0 <= ex0 && x1 > ex0 && y0 < ey0 && y1 > ey0)
-//                return false;
-//            if(x0 <= ex1 && x1 > ex1 && y0 < ey1 && y1 > ey1)
-//                return false;
-//            if(x0 < ex0 && x1 > ex0 && y0 < ey1 && y1 > ey1)
-//                return false;
-//            if(x0 < ex1 && x1 > ex1 && y0 < ey0 && y1 > ey0)
+//            if(e.body.contains(entity.body))
 //                return false;
 //        }
 //        //Player Collision
-//        for(Entity e : players) {
-//            if(entity.equals(e)) {
-//                continue;
-//            }
-//            float ex0 = e.position.x;// - (e.size.x / 2f);
-//            float ex1 = ex0 + e.size.x;
-//            float ey0 = e.position.y;// - (e.size.y / 2f);
-//            float ey1 = ey0 + e.size.y;
-//            if(x0 <= ex0 && x1 > ex0 && y0 < ey0 && y1 > ey0) {
-//                System.out.println(entity.position.toString() + ", " + e.position.toString());
+//
+//        for(int i = 0; i < players.length; i++) {
+////            if(entity.equals(e)) continue;
+//            Entity e = players[i];
+////            System.out.println(e.body.toString() + "," + entity.body.toString());
+//            if(e.body.contains(entity.body)) {
+//
 //                return false;
 //            }
-//            if(x0 <= ex1 && x1 > ex1 && y0 < ey1 && y1 > ey1)
-//                return false;
 //        }
         return true;
     }
