@@ -21,6 +21,7 @@ public class SpriteSheet {
 
     //-----------------------Maps-----------------------------------//
     public static Texture one;
+    public static Texture two;
 
 
     //------------------------TileSheet---------------------------//
@@ -28,6 +29,9 @@ public class SpriteSheet {
 
     //------------------------Tiles----------------------------------//
     public static TextureRegion grass;
+    public static TextureRegion sand;
+    public static TextureRegion dirt;
+    public static TextureRegion water;
     public static TextureRegion space;
 
 
@@ -48,9 +52,13 @@ public class SpriteSheet {
 
 
         one = new Texture(Gdx.files.internal("maps/one.png"));
+        two = new Texture(Gdx.files.internal("maps/two.png"));
 
 
         grass = new TextureRegion(tiles, 0, 0, 32, 32);
+        dirt = new TextureRegion(tiles, 99, 0, 32, 32);
+        sand = new TextureRegion(tiles, 99, 33, 32, 32);
+        water = new TextureRegion(tiles, 33, 33, 32, 32);
         space = new TextureRegion(tiles, 33, 0, 32, 32);
 
     }
