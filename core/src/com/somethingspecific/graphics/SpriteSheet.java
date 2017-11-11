@@ -65,7 +65,7 @@ public class SpriteSheet {
 
         //---------------------------------------HOOD GOD-----------------------------------------------------//
         Texture FENRIR_SHEET = new Texture(Gdx.files.internal("textures/spritesheet/fenrir_sprites.png"));
-        int FENRIR_FRAME_COUNT = 10;
+        int FENRIR_FRAME_COUNT = 30;
 
         TextureRegion[] FENRIR_IDLE = new TextureRegion[FENRIR_FRAME_COUNT];
         TextureRegion[] FENRIR_FORWARD = new TextureRegion[FENRIR_FRAME_COUNT];
