@@ -22,10 +22,10 @@ public class Player extends Mob {
 
 
     public void jump() {
-        velocity.y += 20;
+        velocity.y += 200;
     }
     public void dashLeft(){
-        newPosition.x -=20 ;
+        newPosition.x -=200 ;
         dashing = true;
     }
 
@@ -68,42 +68,85 @@ public class Player extends Mob {
 
         velocity.add(Entity.gravity);
         newPosition.x += InputManager.horizontal[playerNum];
-        System.out.print("newPosition "+newPosition.x);
+        System.out.println("newPosition "+newPosition.x);
         newPosition.add(velocity);
         if(playerNum == 0)
         System.out.println("Velocity is: " + velocity.toString() + ", position: " + position.toString() + ", newPosition: " + newPosition.toString());
 
         int scale = 1;
         boolean collided = false;
+        //--------------------------------------------------------
         if(position.x != newPosition.x) {
             collPosition.set(position);
-            if(position.x > newPosition.x) scale = -1;
-            for(float x = position.x; x < newPosition.x; x += (1 * scale)) {
-                collPosition.add(scale, 0);
-                if(!ent.checkCollision(collPosition, size))  {
-                    position.set(collPosition);
-                    collided = true;
-                    break;
+            if (position.x < newPosition.x) {
+                for (float x = position.x; x < newPosition.x; x += 1) {
+                    collPosition.x += 1;
+                    if (!ent.checkCollision(collPosition, size)) {
+                        break;
+                    }
                 }
-            }
-            if(!collided) position.set(collPosition);
-        }
+            } else if (position.x > newPosition.x) {
+                for (float x = position.x; x > newPosition.x; x -= 1) {
+                    collPosition.x -= 1;
+                    if (!ent.checkCollision(collPosition, size)) {
+                        break;
+                    }
+                }
 
+            }
+            position.set(collPosition);
+        }
         if(position.y != newPosition.y) {
             collPosition.set(position);
-            scale = 1;
-            collided = false;
-            if (position.y > newPosition.y) scale = -1;
-            for (float y = position.y; y < newPosition.y; y += (1 * scale)) {
-                collPosition.add(0, scale);
-                if (!ent.checkCollision(collPosition, size)) {
-                    position.set(collPosition);
-                    collided = true;
-                    break;
+            if (position.y < newPosition.y) {
+                for (float x = position.y; x < newPosition.y; x += 1) {
+                    collPosition.y += 1;
+                    if (!ent.checkCollision(collPosition, size)) {
+                        break;
+                    }
                 }
+            } else if (position.y > newPosition.y) {
+                for (float x = position.y; x > newPosition.y; x -= 1) {
+                    collPosition.y -= 1;
+                    if (!ent.checkCollision(collPosition, size)) {
+                        break;
+                    }
+                }
+
             }
-            if (!collided) position.set(collPosition);
+            position.set(collPosition);
         }
+
+//
+//
+
+//            if(position.x > newPosition.x) scale = -1;
+//            for(float x = position.x; x < newPosition.x; x += (1 * scale)) {
+//                collPosition.add(scale, 0);
+//                if(!ent.checkCollision(collPosition, size))  {
+//                    position.set(collPosition);
+//                    collided = true;
+//                    break;
+//                }
+//            }
+//            if(!collided) position.set(newPosition);
+//        }
+
+//        if(position.y != newPosition.y) {
+//            collPosition.set(position);
+//            scale = 1;
+//            collided = false;
+//            if (position.y > newPosition.y) scale = -1;
+//            for (float y = position.y; y < newPosition.y; y += (1 * scale)) {
+//                collPosition.add(0, scale);
+//                if (!ent.checkCollision(collPosition, size)) {
+//                    position.set(collPosition);
+//                    collided = true;
+//                    break;
+//                }
+//            }
+//            if (!collided) position.set(newPosition);
+//        }
 
     }
 
